@@ -8,3 +8,5 @@
 /build
 /dist
 /scikit_commpy.egg-info
+
+.vscode

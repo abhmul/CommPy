@@ -44,13 +44,13 @@ def turbo_encode(msg_bits, trellis1, trellis2, interleaver):
         outputs from the two component codes.
     """
 
-    stream = conv_encode(msg_bits, trellis1, 'rsc')
+    stream = conv_encode(msg_bits, trellis1)
     sys_stream = stream[::2]
     non_sys_stream_1 = stream[1::2]
 
     interlv_msg_bits = interleaver.interlv(sys_stream)
     puncture_matrix = array([[0, 1]])
-    non_sys_stream_2 = conv_encode(interlv_msg_bits, trellis2, 'rsc', puncture_matrix)
+    non_sys_stream_2 = conv_encode(interlv_msg_bits, trellis2, puncture_matrix=puncture_matrix)
 
     sys_stream = sys_stream[0:-trellis1.total_memory]
     non_sys_stream_1 = non_sys_stream_1[0:-trellis1.total_memory]
